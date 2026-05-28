@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Barón del Humo Negro - Perfil</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Oswald:wght@500&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* CONFIGURACIÓN BASE REFORZADA */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #020202;
+            color: #ffffff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* CAPA DE LA IMAGEN DE FONDO REAL */
+        .contenedor-fondo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .contenedor-fondo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* VIÑETA OSCURA INTEGRADA */
+        .vignette {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0) 20%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.95) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* CAPA DE LA INTERFAZ WEB POR ENCIMA DE TODO */
+        .interface-wrapper {
+            position: relative;
+            z-index: 3;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        /* DISEÑO DE LAS LETRAS */
+        .header-branding {
+            margin-top: 20px;
+        }
+
+        .game-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            letter-spacing: 12px;
+            color: #f4e4bc; 
+            text-shadow: 0px 0px 15px rgba(244, 228, 188, 0.3), 
+                         0px 4px 20px rgba(0, 0, 0, 0.95);
+            line-height: 1;
+        }
+
+        .game-subtitle {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 500;
+            letter-spacing: 8px;
+            color: #d86d27; 
+            margin-top: 15px;
+            text-shadow: 0px 3px 10px rgba(0, 0, 0, 0.9);
+        }
+
+        /* BOTONES Y PIE DE PÁGINA */
+        .footer-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .project-tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #aaaaaa;
+            text-shadow: 0px 2px 5px rgba(0,0,0,0.8);
+        }
+
+        .buttons-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-industrial {
+            padding: 15px 35px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-decoration: none;
+            text-transform: uppercase;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #d86d27;
+            color: #ffffff;
+            border: 1px solid #e57c35;
+            box-shadow: 0px 4px 15px rgba(216, 109, 39, 0.4);
+        }
+
+        .btn-primary:hover {
+            background-color: #f4e4bc;
+            color: #020202;
+            border-color: #f4e4bc;
+        }
+
+        .btn-secondary {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #cccccc;
+            border: 1px solid #3a3a3c;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-secondary:hover {
+            color: #ffffff;
+            border-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .game-title { font-size: 2.8rem; letter-spacing: 6px; }
+            .game-subtitle { font-size: 1.1rem; letter-spacing: 4px; }
+            .buttons-group { flex-direction: column; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor-fondo">
+        <img src="fondo_mina.jpg" onerror="this.onerror=null; this.src='fondo_mina.jpeg';" alt="Fondo Mina">
+        <div class="vignette"></div>
+    </div>
+
+    <div class="interface-wrapper">
+        <header class="header-branding">
+            <h1 class="game-title">EL BARÓN</h1>
+            <div class="game-subtitle">DEL HUMO NEGRO</div>
+        </header>
