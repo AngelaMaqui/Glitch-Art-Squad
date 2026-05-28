@@ -7,59 +7,28 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Oswald:wght@500&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Oswald:wght@500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        /* CONFIGURACIÓN BASE REFORZADA */
+        /* CONFIGURACIÓN BASE REFORZADA PARA SCROLL */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth; /* Desplazamiento suave de arriba a abajo */
         }
 
         body, html {
-            height: 100%;
             width: 100%;
             font-family: 'Montserrat', sans-serif;
             background-color: #020202;
             color: #ffffff;
-            overflow: hidden;
+            /* Quitamos el overflow hidden para permitir bajar en la página */
+        }
+
+        /* --- SECCIÓN 1: PANTALLA DE INICIO (VIDEO) --- */
+        .pantalla-inicio {
             position: relative;
-        }
-
-        /* CAPA DE LA IMAGEN DE FONDO REAL */
-        .contenedor-fondo {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .contenedor-fondo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* VIÑETA OSCURA INTEGRADA */
-        .vignette {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(0,0,0,0) 20%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.95) 100%);
-            z-index: 2;
-            pointer-events: none;
-        }
-
-        /* CAPA DE LA INTERFAZ WEB POR ENCIMA DE TODO */
-        .interface-wrapper {
-            position: relative;
-            z-index: 3;
             height: 100vh;
             width: 100%;
             display: flex;
@@ -68,11 +37,45 @@
             align-items: center;
             padding: 60px 20px;
             text-align: center;
+            overflow: hidden;
         }
 
-        /* DISEÑO DE LAS LETRAS */
-        .header-branding {
-            margin-top: 20px;
+        .contenedor-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .contenedor-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .vignette {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0) 20%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.95) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .interface-wrapper {
+            position: relative;
+            z-index: 3;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
         }
 
         .game-title {
@@ -81,8 +84,7 @@
             font-weight: 700;
             letter-spacing: 12px;
             color: #f4e4bc; 
-            text-shadow: 0px 0px 15px rgba(244, 228, 188, 0.3), 
-                         0px 4px 20px rgba(0, 0, 0, 0.95);
+            text-shadow: 0px 0px 15px rgba(244, 228, 188, 0.3), 0px 4px 20px rgba(0, 0, 0, 0.95);
             line-height: 1;
         }
 
@@ -96,13 +98,11 @@
             text-shadow: 0px 3px 10px rgba(0, 0, 0, 0.9);
         }
 
-        /* BOTONES Y PIE DE PÁGINA */
         .footer-actions {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 20px;
-            margin-bottom: 20px;
         }
 
         .project-tag {
@@ -110,7 +110,6 @@
             text-transform: uppercase;
             letter-spacing: 3px;
             color: #aaaaaa;
-            text-shadow: 0px 2px 5px rgba(0,0,0,0.8);
         }
 
         .buttons-group {
@@ -136,7 +135,7 @@
             box-shadow: 0px 4px 15px rgba(216, 109, 39, 0.4);
         }
 
-        .btn-primary:hover {
+        .btn-primary:hover, .btn-scroll-down:hover {
             background-color: #f4e4bc;
             color: #020202;
             border-color: #f4e4bc;
@@ -155,7 +154,154 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-        @media (max-width: 768px) {
+        /* Botón indicador para bajar */
+        .btn-scroll-down {
+            margin-top: 15px;
+            font-size: 0.75rem;
+            color: #f4e4bc;
+            text-decoration: none;
+            letter-spacing: 2px;
+            border: 1px dashed rgba(244, 228, 188, 0.4);
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
+        }
+
+
+        /* --- SECCIÓN 2: HISTORIA DEL PERSONAJE (ABAJO) --- */
+        .seccion-historia {
+            min-height: 100vh;
+            width: 100%;
+            background: linear-gradient(180deg, #020202 0%, #0d0d0e 50%, #050505 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 10%;
+            border-top: 2px solid #22150c; /* Detalle de óxido/cobre superior */
+            position: relative;
+        }
+
+        /* Contenedor dividido en 2 columnas */
+        .contenedor-lore {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            gap: 60px;
+            align-items: center;
+        }
+
+        /* Lado izquierdo: Textos animados */
+        .lore-texto {
+            flex: 1;
+            text-align: left;
+            opacity: 0;
+            transform: translateX(-50px); /* Sale desde la izquierda */
+            animation: aparecerLore 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 0.5s; /* Se activa tras bajar */
+        }
+
+        .lore-titulo {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2.2rem;
+            color: #d86d27;
+            margin-bottom: 25px;
+            letter-spacing: 4px;
+            border-bottom: 1px solid rgba(216, 109, 39, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .lore-parrafo {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #dddddd;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .lore-destaque {
+            font-weight: 600;
+            color: #f4e4bc;
+        }
+
+        /* Lado derecho: Recuadro del Rostro / Personaje */
+        .lore-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: scale(0.9) translateY(30px); /* Efecto de subida sutil */
+            animation: aparecerVisual 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 0.8s;
+        }
+
+        /* Cuadrado Industrial para el Personaje */
+        .marco-personaje {
+            width: 380px;
+            height: 380px;
+            border: 3px solid #3a2212; /* Borde cobre oscuro */
+            background-color: #080809;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.8), 0px 0px 20px rgba(216, 109, 39, 0.1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        /* Remaches decorativos en las esquinas del marco */
+        .marco-personaje::before {
+            content: '⚙️';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: 0.7rem;
+            opacity: 0.4;
+        }
+
+        /* Espacio para meter la imagen de la cara del personaje */
+        .marco-personaje img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ajusta la imagen sin deformarla */
+            filter: grayscale(30%) sepia(20%) brightness(85%); /* Filtro industrial sombrío */
+            display: block;
+        }
+
+        /* Reemplazo si no hay imagen (Efecto silueta técnica) */
+        .placeholder-rostro {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333335;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 1px dashed rgba(244, 228, 188, 0.1);
+        }
+
+        /* ANIMACIONES ENTRADA */
+        @keyframes aparecerLore {
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes aparecerVisual {
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* RESPONSIVO PARA MÓVILES */
+        @media (max-width: 900px) {
+            .contenedor-lore { flex-direction: column-reverse; gap: 40px; }
+            .lore-texto { text-align: center; }
+            .lore-parrafo { text-align: center; }
+            .marco-personaje { width: 280px; height: 280px; }
             .game-title { font-size: 2.8rem; letter-spacing: 6px; }
             .game-subtitle { font-size: 1.1rem; letter-spacing: 4px; }
             .buttons-group { flex-direction: column; gap: 12px; }
@@ -164,13 +310,53 @@
 </head>
 <body>
 
-    <div class="contenedor-fondo">
-        <img src="fondo_mina.jpg" onerror="this.onerror=null; this.src='fondo_mina.jpeg';" alt="Fondo Mina">
-        <div class="vignette"></div>
-    </div>
+    <section class="pantalla-inicio">
+        <div class="contenedor-video">
+            <video autoplay loop muted playsinline>
+                <source src="mina.mp4" type="video/mp4">
+            </video>
+            <div class="vignette"></div>
+        </div>
 
-    <div class="interface-wrapper">
-        <header class="header-branding">
-            <h1 class="game-title">EL BARÓN</h1>
-            <div class="game-subtitle">DEL HUMO NEGRO</div>
-        </header>
+        <div class="interface-wrapper">
+            <header class="header-branding">
+                <h1 class="game-title">EL BARÓN</h1>
+                <div class="game-subtitle">DEL HUMO NEGRO</div>
+            </header>
+
+            <main class="footer-actions">
+                <div class="buttons-group">
+                </div>
+                <a href="#historia" class="btn-scroll-down">↓ DESCUBRIR HISTORIA ↓</a>
+            </main>
+        </div>
+    </section>
+
+
+    <section class="seccion-historia" id="historia">
+        <div class="contenedor-lore">
+            
+            <div class="lore-texto">
+               <h2 class="lore-titulo">CRÓNICAS DEL SOCAVÓN</h2>
+               <p class="lore-parrafo">
+    Inspirado en la oscura ambición de los barones del estaño de principios del siglo XX, Patiño comenzó como un magnate minero obsesionado con acumular riqueza y dominar las venas de la Tierra. Su codicia lo llevó a descender a lo más profundo del subsuelo para sellar un pacto prohibido con El Tío de la mina. A cambio de poder absoluto, reemplazó sus órganos internos por maquinaria pesada y calderas vivientes, transformándose en un cyborg impulsado por vapor que viste un traje elegante chorreando grasa negra, con chimeneas en su cabeza que expulsan gases tóxicos y ojos que arden como carbones encendidos.
+</p>
+<p class="lore-parrafo">
+    Hoy en día, este titán eterno utiliza su inmenso poder para comprar las almas de los soldados caídos en combate y convertirlos en autómatas mineros que trabajan sin descanso en sus dominios. En el campo de batalla es un estratega letal que controla masas enteras: es capaz de invocar rieles de trenes subterráneos que brotan del suelo para atropellar a sus enemigos, lanzar ráfagas de humo denso que ciegan por completo el lugar y arrojar dinamita fundida con estaño líquido que inmoviliza por completo a sus rivales en cuanto se enfría.
+</p>
+            </div>
+
+            <div class="lore-visual">
+                <div class="marco-personaje">
+                    <img src="rostro_baron.jpeg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Retrato del Barón">
+                    <div class="placeholder-rostro" style="display: none;">
+                        [ ARCHIVO VISUAL DEL ANTAGONISTA ]
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+</html>
